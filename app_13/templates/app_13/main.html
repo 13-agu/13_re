@@ -15,7 +15,7 @@
 			<ul>
 				{% for tw, usr_id in tw_1 %}
 				<li>
-					<a href="http://twitter.com/{{usr_id}}">{{usr_id}}</a> {{tw}}
+					<a href="http://twitter.com/{{usr_id}}">{{usr_id}}</a> {{tw | urlize | linebreaksbr }}
 				</li>
 				{% endfor %}
 			</ul>

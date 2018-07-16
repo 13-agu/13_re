@@ -3,6 +3,8 @@ from requests_oauthlib import OAuth1Session
 import requests   # Web からデータを取ってくる時に使う
 import json
 from twitter import *
+import re
+import html
 
 AT='825188365007872000-af18jBAUI5BOkiqTWrbpX28WhKA0CrL'
 AS='y3ZSkUiMK60t5wmLoTcNsyMjw7sj4oHJS2kuvwfOeQj5s'
@@ -11,7 +13,6 @@ CS='WKgRlgCuDl80bMbY1YwozZdztIt9mceahBNX2pnU3f9wqqy0zy'
 twitter = OAuth1Session(CK, CS, AT, AS)
 
 def appmain(request):
-	s=''
 	s_list=[]
 	usr_list=[]
 	url = "https://api.twitter.com/1.1/statuses/user_timeline.json"
