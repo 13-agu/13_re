@@ -15,6 +15,7 @@ twitter = OAuth1Session(CK, CS, AT, AS)
 def appmain(request):
 	s_list=[]
 	usr_list=[]
+	id_list=[]
 	url = "https://api.twitter.com/1.1/statuses/user_timeline.json"
 
 	params ={'count' : 5}
@@ -28,9 +29,10 @@ def appmain(request):
 #			s=s+tweet['user']['screen_name']+tweet['text']
 			s_list.append(tweet['text'])
 			usr_list.append(tweet['user']['screen_name'])
+			id_list.append(tweet['id'])
 	else:
 		print("ERROR: %d" % req.status_code)
 
 	return render(request, 'app_13/main.html', {
-		'tw_1' : zip(s_list, usr_list),
+		'tw_1' : zip(s_list, usr_list, id_list),
 	})
