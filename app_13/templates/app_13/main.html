@@ -13,9 +13,9 @@
 	<div id="tweet">
 		<p>
 			<ul>
-				{% for tw in tw_1 %}
+				{% for tw, usr_id in tw_1 %}
 				<li>
-					{{tw}}
+					<a href="http://twitter.com/{{usr_id}}">{{usr_id}}</a> {{tw}}
 				</li>
 				{% endfor %}
 			</ul>
