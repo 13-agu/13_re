@@ -5,6 +5,7 @@ import json
 from twitter import *
 import re
 import html
+import random
 
 AT='825188365007872000-af18jBAUI5BOkiqTWrbpX28WhKA0CrL'
 AS='y3ZSkUiMK60t5wmLoTcNsyMjw7sj4oHJS2kuvwfOeQj5s'
@@ -35,4 +36,5 @@ def appmain(request):
 
 	return render(request, 'app_13/main.html', {
 		'tw_1' : zip(s_list, usr_list, id_list),
+		'test' : "http://dic.nicovideo.jp/random/a",
 	})
