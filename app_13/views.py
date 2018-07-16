@@ -24,10 +24,10 @@ def appmain(request):
 			#print(tweet['text'])
 			#print('----------------------------------------------------')
 #			s=s+tweet['user']['screen_name']+tweet['text']
-			s_list.append(tweet['user']['screen_name']+tweet['text'])
+			s_list.append(tweet['user']['screen_name']+' '+tweet['text'])
 	else:
 		print("ERROR: %d" % req.status_code)
-		
+
 	return render(request, 'app_13/main.html', {
 		'tw_1' : s_list,
 	})
