@@ -1,0 +1,12 @@
+{% load staticfiles %}
+<html>
+
+<head>
+
+</head>
+
+<body>
+	{{test1}}{{test2}}
+</body>
+
+</html>
