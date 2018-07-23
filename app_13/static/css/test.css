@@ -16,10 +16,3 @@
   line-height: 1.5;
   padding: 0.5em 0;
 }
-table.soft_rank{
-	counter-reset: ranking;
-}
-table.soft_rank tbody th:before{
-	counter-increment: ranking;
-	content: counter(ranking) "位";
-}
