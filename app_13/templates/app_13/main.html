@@ -13,6 +13,16 @@
 	<div id="tweet">
 		<p>
 			<ul>
+				{% for s,d in soft_date %}
+				<li>
+					{{s}} {{d}}
+				</li>
+				{% endfor %}
+			</ul>
+
+
+
+			<ul>
 				{% for message in messagelist %}
 				<li>
 					{{message | urlize | linebreaksbr }}

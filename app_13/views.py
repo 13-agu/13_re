@@ -33,11 +33,12 @@ twitter = OAuth1Session(CK, CS, AT, AS)
 def appmain(request):
 	message = ""
 	messagelist = []
-	params ={'count' : 20}#ツイート数
+	params ={'count' : 30}#ツイート数
 	url = "https://api.twitter.com/1.1/statuses/home_timeline.json?tweet_mode=extended"
 	req = twitter.get(url, params = params)
 	softcount = 1
 	soft = []
+	date = []
 
 	if req.status_code == 200:
 		timeline = json.loads(req.text)
@@ -47,18 +48,20 @@ def appmain(request):
 				#if tweet['full_text'].find("今日のソフト")
 				#テキストデータ作成
 				message = message + tweet['full_text'] + '\n\n'
-				messagelist.append(tweet['full_text'])
+				messagelist.append(html.unescape(tweet['full_text']))
 				softcount = softcount + 1
 				match = re.search(r'【今日のソフト】\n?(.+)♪', tweet['full_text'])
 				if match:
-					tmp = match.group(1);
+					tmp = match.group(1).replace('デラックス','DX');
 					match = re.search(r'(.+)♪(.+)', tmp)
 					while match:
 						softcount = softcount + 1
 						soft.append(format_text(match.group(2)))
+						date.append(tweet['created_at'])
 						tmp = match.group(1);
 						match = re.search(r'(.+)♪(.+)', tmp)
 					soft.append(format_text(tmp.strip('初登場')))
+					date.append(tweet['created_at'])
 					#match = re.search(r'<b>(.+)</b>', 'This is a <b>nice</b> pen')
 
 					#ここから画像処理
@@ -82,5 +85,5 @@ def appmain(request):
 	return render(request, 'app_13/main.html', {
 	'messagelist' : messagelist,
 	'softcount' : softcount,
-	'soft' : soft,
+	'soft_date' : zip(soft,date),
 	})
