@@ -72,7 +72,7 @@ def appmain(request):
 						media_urls = urls['media_url']#画像のURLを取得
 						downloads = requests.get(media_urls).content #画像のDL
 						#ファイル名この真下
-						images = open(tweet['user']["screen_name"] + "_" + tweet["id_str"] + '_' + str(count) + '.jpg', 'wb')
+						images = open("img/" + tweet['user']["screen_name"] + "_" + tweet["id_str"] + '_' + str(count) + '.jpg', 'wb')
 						images.write(downloads)
 						images.close()
 						count = count + 1
