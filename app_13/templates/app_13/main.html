@@ -13,15 +13,14 @@
 	<div id="tweet">
 		<p>
 			<ul>
-				{% for tw, scr_name, tw_id in tw_1 %}
+				{% for message in messagelist %}
 				<li>
-					<a href="http://twitter.com/{{scr_name}}">{{scr_name}}</a> <a href='https://twitter.com/{{scr_name}}/status/{{tw_id}}'>{{tw | urlize | linebreaksbr }}</a>
+					{{message | urlize | linebreaksbr }}
 				</li>
 				{% endfor %}
 			</ul>
 		</p>
 	</div>
-	<a href="{{test}}">?</a>
 </body>
 
 </html>
