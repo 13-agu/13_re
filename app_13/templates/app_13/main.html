@@ -12,23 +12,12 @@
 <body>
 	<div id="tweet">
 		<p>
-			<ul>
-				{% for s,d in soft_date %}
-				<li>
-					{{s}} {{d}}
-				</li>
-				{% endfor %}
-			</ul>
-
-
-
-			<ul>
-				{% for message in messagelist %}
-				<li>
-					{{message | urlize | linebreaksbr }}
-				</li>
-				{% endfor %}
-			</ul>
+			今日のアイスは
+			{% for s in soft %}
+				,{{s}}
+			{% endfor %}
+			です！
+			<img src={{img_lnk}} />
 		</p>
 	</div>
 </body>
