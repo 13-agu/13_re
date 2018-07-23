@@ -82,6 +82,8 @@ def appmain(request):
 	print(softcount)
 	print(soft)
 
+    #ころすぞ
+
 	return render(request, 'app_13/main.html', {
 	'messagelist' : messagelist,
 	'softcount' : softcount,
