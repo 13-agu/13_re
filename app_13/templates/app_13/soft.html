@@ -20,20 +20,16 @@
 				</thead>
 				<tbody>
 					{% for s,i in freq %}
-						
+						<tr>
+							<th></th>
+							<td>{{s}}</td>
+							<td>{{i}}</td>
+						</tr>
 					{% endfor %}
 				</tbody>
 
 			</table>
 
-
-			<ol>
-				{% for s,i in freq %}
-				<li>
-					{{s}} {{i}}
-				</li>
-				{% endfor %}
-			</ol>
 
 			</ul>
 		</p>
