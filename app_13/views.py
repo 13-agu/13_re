@@ -34,7 +34,7 @@ twitter = OAuth1Session(CK, CS, AT, AS)
 
 def appmain(request):
 	params ={'count' : 10}#ツイート数
-	url = "https://api.twitter.com/1.1/statuses/user_timeline.json?user_id=3195831606"
+	url = "https://api.twitter.com/1.1/statuses/user_timeline.json?user_id=3195831606&tweet_mode=extended"
 	req = twitter.get(url, params = params)
 	soft = []
 	img_lnk = ''
@@ -42,12 +42,14 @@ def appmain(request):
 		timeline = json.loads(req.text)
 		for tweet in (timeline):
 
-			if r"【今日のソフト】" in tweet['text']:
+			if r"【今日のソフト】" in tweet['full_text']:
 				if "extended_entities" in tweet:
 					img_lnk=tweet['extended_entities']['media'][0]['media_url']
+				else:
+					print('は？')
 				#if tweet['text'].find("今日のソフト")
 				#テキストデータ作成
-				match = re.search(r'【今日のソフト】\n?(.+)♪', tweet['text'])
+				match = re.search(r'【今日のソフト】\n?(.+)♪', tweet['full_text'])
 				if match:
 					tmp = match.group(1).replace('デラックス','DX');
 					match = re.search(r'(.+)♪(.+)', tmp)
