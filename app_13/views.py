@@ -2,7 +2,7 @@ from django.shortcuts import render
 from requests_oauthlib import OAuth1Session
 import requests   # Web からデータを取ってくる時に使う
 import json, os, codecs, io, sys
-from twitter import *
+#from twitter import *
 import re
 import html
 import random
@@ -37,6 +37,7 @@ def appmain(request):
 	url = "https://api.twitter.com/1.1/statuses/user_timeline.json?user_id=3195831606&tweet_mode=extended"
 	req = twitter.get(url, params = params)
 	soft = []
+	date = []
 	img_lnk = ''
 	if req.status_code == 200:
 		timeline = json.loads(req.text)
@@ -45,16 +46,14 @@ def appmain(request):
 			if r"【今日のソフト】" in tweet['full_text']:
 				if "extended_entities" in tweet:
 					img_lnk=tweet['extended_entities']['media'][0]['media_url']
-				else:
-					print('は？')
-				#if tweet['text'].find("今日のソフト")
+				#if tweet['full_text'].find("今日のソフト")
 				#テキストデータ作成
 				match = re.search(r'【今日のソフト】\n?(.+)♪', tweet['full_text'])
 				if match:
 					tmp = match.group(1).replace('デラックス','DX');
 					match = re.search(r'(.+)♪(.+)', tmp)
 					while match:
-						softcount = softcount + 1
+						#softcount = softcount + 1
 						soft.append(format_text(match.group(2)))
 						date.append(parser.parse(tweet['created_at']).astimezone(timezone('Asia/Tokyo')))
 						tmp = match.group(1);
@@ -77,7 +76,7 @@ def soft(request):
 	img_lnk = []
 	l_id = ''
 	for i in range(1,10):
-		url = "https://api.twitter.com/1.1/statuses/user_timeline.json?user_id=3195831606" + l_id
+		url = "https://api.twitter.com/1.1/statuses/user_timeline.json?user_id=3195831606" + l_id+"&tweet_mode=extended"
 		req = twitter.get(url, params = params)
 		if req.status_code == 200:
 			timeline = json.loads(req.text)
@@ -86,14 +85,14 @@ def soft(request):
 				break
 			for tweet in (timeline):
 				l_id = '&max_id='+tweet['id_str']
-				if r"【今日のソフト】" in tweet['text']:
+				if r"【今日のソフト】" in tweet['full_text']:
 
-					#if tweet['text'].find("今日のソフト")
+					#if tweet['full_text'].find("今日のソフト")
 					#テキストデータ作成
-					message = message + tweet['text'] + '\n\n'
-					messagelist.append(html.unescape(tweet['text']))
+					message = message + tweet['full_text'] + '\n\n'
+					messagelist.append(html.unescape(tweet['full_text']))
 					softcount = softcount + 1
-					match = re.search(r'【今日のソフト】\n?(.+)♪', html.unescape(tweet['text']))
+					match = re.search(r'【今日のソフト】\n?(.+)♪', html.unescape(tweet['full_text']))
 					if match:
 						tmp = match.group(1).replace('デラックス','DX');
 						match = re.search(r'(.+)♪(.+)', tmp)
